@@ -4,14 +4,14 @@
 
 ## Description
 This project is a Snake-inspired 2D dungeon game built with **C# & MonoGame** (Desktop GL project, Windows-compatible), adapted from the MonoGame 2D tutorial with some custom tweaks. Started as a MonoGame tutorial demo, it is reimagined with Snake-like gameplay:
-- You control a **lead slime** that spawns at the center of the dungeon, moving right by default.
+- You control a **leading slime** that spawns at the center of the dungeon, moving right by default.
 - A single bat flies randomly around the dungeon. Collect it, and a new slime will join your trailing "snake" of slimes.
 - The game progresses as your slime trail grows longer (more bats collected).
-- **Game Over Triggers**: The lead slime hits dungeon walls, or collides with any slime in the trailing group.
+- **Game Over Triggers**: The leading slime hits dungeon walls, or collides with any slime in the trailing group.
 
 ## Modified Content
 This version builds on the original MonoGame 2D tutorial project with these custom tweaks:
-- **Highest Score Tracking**: Displays current score and the highest score of the current game session. Persistent high score saving functionality is now implemented in `GameMain.cs`.
+- **Highest Score Tracking & Saving**: Displays current score and the highest score of the current game session. Persistent high score saving functionality is now implemented in `GameMain.cs`, with the high score saved to a text file (`highscore.txt`) in the game directory.
 - **Bottom Operation Hints**: Persistent on-screen message (i.e., "Arrow Keys or WASD = Move, Esc = Pause") for player guidance.
 
 ## How to Play
