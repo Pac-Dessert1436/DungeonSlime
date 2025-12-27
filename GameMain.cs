@@ -66,6 +66,24 @@ public class GameMain : GameCore
     {
         // Load the background theme music
         _themeSong = Content.Load<Song>("audio/theme");
+        if (File.Exists("highscore.txt"))
+        {
+            if (int.TryParse(File.ReadAllText("highscore.txt"), out int highScore))
+            {
+                GameScene.HighScore = highScore;
+            }
+            else 
+            {
+                File.Delete("highscore.txt");
+                GameScene.HighScore = 0;
+            }
+        }
+    }
+
+    protected override void EndRun()
+    {
+        // Save high score to file.
+        File.WriteAllText("highscore.txt", GameScene.HighScore.ToString());
     }
 
     public static void Main()

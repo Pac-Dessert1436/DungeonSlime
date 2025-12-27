@@ -36,7 +36,7 @@ public class GameScene : Scene
 
     // Tracks the player's score and high score.
     private int _score;
-    private static int _highScore;
+    public static int HighScore { get; set; }
 
     private GameSceneUI _ui;
 
@@ -134,7 +134,7 @@ public class GameScene : Scene
 
         // Reset the score
         _score = 0;
-        _ui.UpdateScoreText(_score, _highScore);
+        _ui.UpdateScoreText(_score, HighScore);
 
         // Set the game state to playing
         _state = GameState.Playing;
@@ -234,13 +234,13 @@ public class GameScene : Scene
 
             // Increment the score, and update the high score if needed.
             _score += 100;
-            if (_score > _highScore)
+            if (_score > HighScore)
             {
-                _highScore = _score;
+                HighScore = _score;
             }
 
             // Update the score display on the UI.
-            _ui.UpdateScoreText(_score, _highScore);
+            _ui.UpdateScoreText(_score, HighScore);
 
             // Play the collect sound effect
             GameCore.Audio.PlaySoundEffect(_collectSoundEffect);
