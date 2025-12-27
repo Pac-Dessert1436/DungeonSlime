@@ -8,14 +8,14 @@ using DungeonSlime.Utilities.Scenes;
 
 namespace DungeonSlime.Utilities;
 
-public class Core : Game
+public class GameCore : Game
 {
-    internal static Core s_instance;
+    internal static GameCore s_instance;
 
     /// <summary>
     /// Gets a reference to the Core instance.
     /// </summary>
-    public static Core Instance => s_instance;
+    public static GameCore Instance => s_instance;
 
     // The scene that is currently active.
     private static Scene s_activeScene;
@@ -65,7 +65,7 @@ public class Core : Game
     /// <param name="width">The initial width, in pixels, of the game window.</param>
     /// <param name="height">The initial height, in pixels, of the game window.</param>
     /// <param name="fullScreen">Indicates if the game should start in fullscreen mode.</param>
-    public Core(string title, int width, int height, bool fullScreen)
+    public GameCore(string title, int width, int height, bool fullScreen)
     {
         // Ensure that multiple cores are not created.
         if (s_instance != null)

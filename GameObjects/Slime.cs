@@ -234,7 +234,7 @@ public class Slime
 
             // Draw the slime sprite at the calculated visual position of this
             // segment
-            _sprite.Draw(Core.SpriteBatch, pos);
+            _sprite.Draw(GameCore.SpriteBatch, pos);
         }
     }
 

@@ -11,7 +11,7 @@ This project is a Snake-inspired 2D dungeon game built with **C# & MonoGame** (D
 
 ## Modified Content
 This version builds on the original MonoGame 2D tutorial project with these custom tweaks:
-- **Highest Score Tracking**: Displays current score and the highest score of the current game session.No persistent high score saving functionality.
+- **Highest Score Tracking**: Displays current score and the highest score of the current game session. No persistent high score saving functionality.
 - **Bottom Operation Hints**: Persistent on-screen message (i.e., "Arrow Keys or WASD = Move, Esc = Pause") for player guidance.
 
 ## How to Play

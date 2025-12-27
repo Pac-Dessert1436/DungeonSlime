@@ -250,7 +250,7 @@ public class GameSceneUI : ContainerRuntime
     private void OnResumeButtonClicked(object sender, EventArgs args)
     {
         // Button was clicked, play the ui sound effect for auditory feedback.
-        Core.Audio.PlaySoundEffect(_uiSoundEffect);
+        GameCore.Audio.PlaySoundEffect(_uiSoundEffect);
 
         // Since the resume button was clicked, we need to hide the pause panel.
         HidePausePanel();
@@ -262,7 +262,7 @@ public class GameSceneUI : ContainerRuntime
     private void OnRetryButtonClicked(object sender, EventArgs args)
     {
         // Button was clicked, play the ui sound effect for auditory feedback.
-        Core.Audio.PlaySoundEffect(_uiSoundEffect);
+        GameCore.Audio.PlaySoundEffect(_uiSoundEffect);
 
         // Since the retry button was clicked, we need to hide the game over panel.
         HideGameOverPanel();
@@ -274,7 +274,7 @@ public class GameSceneUI : ContainerRuntime
     private void OnQuitButtonClicked(object sender, EventArgs args)
     {
         // Button was clicked, play the ui sound effect for auditory feedback.
-        Core.Audio.PlaySoundEffect(_uiSoundEffect);
+        GameCore.Audio.PlaySoundEffect(_uiSoundEffect);
 
         // Both panels have a quit button, so hide both panels
         HidePausePanel();
@@ -288,7 +288,7 @@ public class GameSceneUI : ContainerRuntime
     {
         // A ui element that can receive focus has received focus, play the
         // ui sound effect for auditory feedback.
-        Core.Audio.PlaySoundEffect(_uiSoundEffect);
+        GameCore.Audio.PlaySoundEffect(_uiSoundEffect);
     }
 
     /// <summary>

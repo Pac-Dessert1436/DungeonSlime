@@ -11,8 +11,8 @@ namespace DungeonSlime;
 /// </summary>
 public static class GameController
 {
-    private static KeyboardInfo s_keyboard => Core.Input.Keyboard;
-    private static GamePadInfo s_gamePad => Core.Input.GamePads[(int)PlayerIndex.One];
+    private static KeyboardInfo s_keyboard => GameCore.Input.Keyboard;
+    private static GamePadInfo s_gamePad => GameCore.Input.GamePads[(int)PlayerIndex.One];
 
     /// <summary>
     /// Returns true if the player has triggered the "move up" action.

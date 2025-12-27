@@ -36,7 +36,7 @@ public class GameScene : Scene
 
     // Tracks the player's score and high score.
     private int _score;
-    private int _highScore;
+    private static int _highScore;
 
     private GameSceneUI _ui;
 
@@ -58,13 +58,13 @@ public class GameScene : Scene
 
         // During the game scene, we want to disable exit on escape. Instead,
         // the escape key will be used to return back to the title screen
-        Core.ExitOnEscape = false;
+        GameCore.ExitOnEscape = false;
 
         // Create the room bounds by getting the bounds of the screen then
         // using the Inflate method to "Deflate" the bounds by the width and
         // height of a tile so that the bounds only covers the inside room of
         // the dungeon tilemap.
-        _roomBounds = Core.GraphicsDevice.PresentationParameters.Bounds;
+        _roomBounds = GameCore.GraphicsDevice.PresentationParameters.Bounds;
         _roomBounds.Inflate(-_tilemap.TileWidth, -_tilemap.TileHeight);
 
         // Subscribe to the slime's BodyCollision event so that a game over
@@ -112,7 +112,7 @@ public class GameScene : Scene
     private void OnQuitButtonClicked(object sender, EventArgs args)
     {
         // Player has chosen to quit, so return back to the title scene
-        Core.ChangeScene(new TitleScene());
+        GameCore.ChangeScene(new TitleScene());
     }
 
     private void InitializeNewGame()
@@ -143,7 +143,7 @@ public class GameScene : Scene
     public override void LoadContent()
     {
         // Create the texture atlas from the XML configuration file
-        TextureAtlas atlas = TextureAtlas.FromFile(Core.Content, "images/atlas-definition.xml");
+        TextureAtlas atlas = TextureAtlas.FromFile(GameCore.Content, "images/atlas-definition.xml");
 
         // Create the tilemap from the XML configuration file.
         _tilemap = Tilemap.FromFile(Content, "images/tilemap-definition.xml");
@@ -243,7 +243,7 @@ public class GameScene : Scene
             _ui.UpdateScoreText(_score, _highScore);
 
             // Play the collect sound effect
-            Core.Audio.PlaySoundEffect(_collectSoundEffect);
+            GameCore.Audio.PlaySoundEffect(_collectSoundEffect);
         }
 
         // Next check if the slime is colliding with the wall by validating if
@@ -401,7 +401,7 @@ public class GameScene : Scene
     public override void Draw(GameTime gameTime)
     {
         // Clear the back buffer.
-        Core.GraphicsDevice.Clear(Color.CornflowerBlue);
+        GameCore.GraphicsDevice.Clear(Color.CornflowerBlue);
 
         if (_state != GameState.Playing)
         {
@@ -409,16 +409,16 @@ public class GameScene : Scene
             _grayscaleEffect.Parameters["Saturation"].SetValue(_saturation);
 
             // And begin the sprite batch using the grayscale effect.
-            Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp, effect: _grayscaleEffect);
+            GameCore.SpriteBatch.Begin(samplerState: SamplerState.PointClamp, effect: _grayscaleEffect);
         }
         else
         {
             // Otherwise, just begin the sprite batch as normal.
-            Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
+            GameCore.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
         }
 
         // Draw the tilemap
-        _tilemap.Draw(Core.SpriteBatch);
+        _tilemap.Draw(GameCore.SpriteBatch);
 
         // Draw the slime.
         _slime.Draw();
@@ -427,7 +427,7 @@ public class GameScene : Scene
         _bat.Draw();
 
         // Always end the sprite batch when finished.
-        Core.SpriteBatch.End();
+        GameCore.SpriteBatch.End();
 
         // Draw the UI
         GameSceneUI.Draw();

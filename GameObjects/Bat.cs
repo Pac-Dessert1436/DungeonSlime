@@ -86,7 +86,7 @@ public class Bat
         _velocity = Vector2.Reflect(_velocity, normal);
 
         // Play the bounce sound effect.
-        Core.Audio.PlaySoundEffect(_bounceSoundEffect);
+        GameCore.Audio.PlaySoundEffect(_bounceSoundEffect);
     }
 
     /// <summary>
@@ -120,6 +120,6 @@ public class Bat
     /// </summary>
     public void Draw()
     {
-        _sprite.Draw(Core.SpriteBatch, Position);
+        _sprite.Draw(GameCore.SpriteBatch, Position);
     }
 }

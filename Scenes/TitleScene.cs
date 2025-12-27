@@ -75,7 +75,7 @@ public class TitleScene : Scene
 
         // While on the title screen, we can enable exit on escape so the player
         // can close the game by pressing the escape key.
-        Core.ExitOnEscape = true;
+        GameCore.ExitOnEscape = true;
 
         // Set the position and origin for the Dungeon text.
         Vector2 size = _font5x.MeasureString(DUNGEON_TEXT);
@@ -97,7 +97,7 @@ public class TitleScene : Scene
 
         // Set the background pattern destination rectangle to fill the entire
         // screen background
-        _backgroundDestination = Core.GraphicsDevice.PresentationParameters.Bounds;
+        _backgroundDestination = GameCore.GraphicsDevice.PresentationParameters.Bounds;
 
         InitializeUI();
     }
@@ -105,7 +105,7 @@ public class TitleScene : Scene
     public override void LoadContent()
     {
         // Load the font for the standard text.
-        _font = Core.Content.Load<SpriteFont>("fonts/04B_30");
+        _font = GameCore.Content.Load<SpriteFont>("fonts/04B_30");
 
         // Load the font for the title text
         _font5x = Content.Load<SpriteFont>("fonts/04B_30_5x");
@@ -114,10 +114,10 @@ public class TitleScene : Scene
         _backgroundPattern = Content.Load<Texture2D>("images/background-pattern");
 
         // Load the sound effect to play when ui actions occur.
-        _uiSoundEffect = Core.Content.Load<SoundEffect>("audio/ui");
+        _uiSoundEffect = GameCore.Content.Load<SoundEffect>("audio/ui");
 
         // Load the texture atlas from the xml configuration file.
-        _atlas = TextureAtlas.FromFile(Core.Content, "images/atlas-definition.xml");
+        _atlas = TextureAtlas.FromFile(GameCore.Content, "images/atlas-definition.xml");
     }
 
     private void CreateTitlePanel()
@@ -149,16 +149,16 @@ public class TitleScene : Scene
     private void HandleStartClicked(object sender, EventArgs e)
     {
         // A UI interaction occurred, play the sound effect
-        Core.Audio.PlaySoundEffect(_uiSoundEffect);
+        GameCore.Audio.PlaySoundEffect(_uiSoundEffect);
 
         // Change to the game scene to start the game.
-        Core.ChangeScene(new GameScene());
+        GameCore.ChangeScene(new GameScene());
     }
 
     private void HandleOptionsClicked(object sender, EventArgs e)
     {
         // A UI interaction occurred, play the sound effect
-        Core.Audio.PlaySoundEffect(_uiSoundEffect);
+        GameCore.Audio.PlaySoundEffect(_uiSoundEffect);
 
         // Set the title panel to be invisible.
         _titleScreenButtonsPanel.IsVisible = false;
@@ -197,7 +197,7 @@ public class TitleScene : Scene
         musicSlider.Visual.Y = 30f;
         musicSlider.Minimum = 0;
         musicSlider.Maximum = 1;
-        musicSlider.Value = Core.Audio.SongVolume;
+        musicSlider.Value = GameCore.Audio.SongVolume;
         musicSlider.SmallChange = .1;
         musicSlider.LargeChange = .2;
         musicSlider.ValueChanged += HandleMusicSliderValueChanged;
@@ -213,7 +213,7 @@ public class TitleScene : Scene
         sfxSlider.Visual.Y = 93;
         sfxSlider.Minimum = 0;
         sfxSlider.Maximum = 1;
-        sfxSlider.Value = Core.Audio.SoundEffectVolume;
+        sfxSlider.Value = GameCore.Audio.SoundEffectVolume;
         sfxSlider.SmallChange = .1;
         sfxSlider.LargeChange = .2;
         sfxSlider.ValueChanged += HandleSfxSliderChanged;
@@ -241,13 +241,13 @@ public class TitleScene : Scene
         var slider = (Slider)sender;
 
         // Set the global sound effect volume to the value of the slider.;
-        Core.Audio.SoundEffectVolume = (float)slider.Value;
+        GameCore.Audio.SoundEffectVolume = (float)slider.Value;
     }
 
     private void HandleSfxSliderChangeCompleted(object sender, EventArgs e)
     {
         // Play the UI Sound effect so the player can hear the difference in audio.
-        Core.Audio.PlaySoundEffect(_uiSoundEffect);
+        GameCore.Audio.PlaySoundEffect(_uiSoundEffect);
     }
 
     private void HandleMusicSliderValueChanged(object sender, EventArgs args)
@@ -260,19 +260,19 @@ public class TitleScene : Scene
         var slider = (Slider)sender;
 
         // Set the global song volume to the value of the slider.
-        Core.Audio.SongVolume = (float)slider.Value;
+        GameCore.Audio.SongVolume = (float)slider.Value;
     }
 
     private void HandleMusicSliderValueChangeCompleted(object sender, EventArgs args)
     {
         // A UI interaction occurred, play the sound effect
-        Core.Audio.PlaySoundEffect(_uiSoundEffect);
+        GameCore.Audio.PlaySoundEffect(_uiSoundEffect);
     }
 
     private void HandleOptionsButtonBack(object sender, EventArgs e)
     {
         // A UI interaction occurred, play the sound effect
-        Core.Audio.PlaySoundEffect(_uiSoundEffect);
+        GameCore.Audio.PlaySoundEffect(_uiSoundEffect);
 
         // Set the title panel to be visible.
         _titleScreenButtonsPanel.IsVisible = true;
@@ -313,37 +313,37 @@ public class TitleScene : Scene
 
     public override void Draw(GameTime gameTime)
     {
-        Core.GraphicsDevice.Clear(new Color(32, 40, 78, 255));
+        GameCore.GraphicsDevice.Clear(new Color(32, 40, 78, 255));
 
         // Draw the background pattern first using the PointWrap sampler state.
-        Core.SpriteBatch.Begin(samplerState: SamplerState.PointWrap);
-        Core.SpriteBatch.Draw(_backgroundPattern, _backgroundDestination, new Rectangle(_backgroundOffset.ToPoint(), _backgroundDestination.Size), Color.White * 0.5f);
-        Core.SpriteBatch.End();
+        GameCore.SpriteBatch.Begin(samplerState: SamplerState.PointWrap);
+        GameCore.SpriteBatch.Draw(_backgroundPattern, _backgroundDestination, new Rectangle(_backgroundOffset.ToPoint(), _backgroundDestination.Size), Color.White * 0.5f);
+        GameCore.SpriteBatch.End();
 
         if (_titleScreenButtonsPanel.IsVisible)
         {
             // Begin the sprite batch to prepare for rendering.
-            Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
+            GameCore.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
             // The color to use for the drop shadow text.
             Color dropShadowColor = Color.Black * 0.5f;
 
             // Draw the Dungeon text slightly offset from it is original position and
             // with a transparent color to give it a drop shadow
-            Core.SpriteBatch.DrawString(_font5x, DUNGEON_TEXT, _dungeonTextPos + new Vector2(10, 10), dropShadowColor, 0.0f, _dungeonTextOrigin, 1.0f, SpriteEffects.None, 1.0f);
+            GameCore.SpriteBatch.DrawString(_font5x, DUNGEON_TEXT, _dungeonTextPos + new Vector2(10, 10), dropShadowColor, 0.0f, _dungeonTextOrigin, 1.0f, SpriteEffects.None, 1.0f);
 
             // Draw the Dungeon text on top of that at its original position
-            Core.SpriteBatch.DrawString(_font5x, DUNGEON_TEXT, _dungeonTextPos, Color.White, 0.0f, _dungeonTextOrigin, 1.0f, SpriteEffects.None, 1.0f);
+            GameCore.SpriteBatch.DrawString(_font5x, DUNGEON_TEXT, _dungeonTextPos, Color.White, 0.0f, _dungeonTextOrigin, 1.0f, SpriteEffects.None, 1.0f);
 
             // Draw the Slime text slightly offset from it is original position and
             // with a transparent color to give it a drop shadow
-            Core.SpriteBatch.DrawString(_font5x, SLIME_TEXT, _slimeTextPos + new Vector2(10, 10), dropShadowColor, 0.0f, _slimeTextOrigin, 1.0f, SpriteEffects.None, 1.0f);
+            GameCore.SpriteBatch.DrawString(_font5x, SLIME_TEXT, _slimeTextPos + new Vector2(10, 10), dropShadowColor, 0.0f, _slimeTextOrigin, 1.0f, SpriteEffects.None, 1.0f);
 
             // Draw the Slime text on top of that at its original position
-            Core.SpriteBatch.DrawString(_font5x, SLIME_TEXT, _slimeTextPos, Color.White, 0.0f, _slimeTextOrigin, 1.0f, SpriteEffects.None, 1.0f);
+            GameCore.SpriteBatch.DrawString(_font5x, SLIME_TEXT, _slimeTextPos, Color.White, 0.0f, _slimeTextOrigin, 1.0f, SpriteEffects.None, 1.0f);
 
             // Always end the sprite batch when finished.
-            Core.SpriteBatch.End();
+            GameCore.SpriteBatch.End();
         }
 
         GumService.Default.Draw();

@@ -6,7 +6,7 @@ using Gum.Forms.Controls;
 
 namespace DungeonSlime;
 
-public class GameMain : Core
+public class GameMain : GameCore
 {
     // The background theme song
     private Song _themeSong;
